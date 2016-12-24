@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="style-bots.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200" rel="stylesheet">
+</head>
+<body>
+  <h1><span>Hover</span> <br>
+    over a bot to see it transform</h1>
+    <h1><span>Press a key</span> <br> "a", "s", "d", "f", "g", "h", or space bar <br>to hear a surprise</h1>
+  <div class="keys">
+    <div data-key="65" class="key rescuebot">
+      <div class="one">
+        <img src="imgs/boulder.jpg" alt="">
+      </div>
+      <div class="two">
+        <img src="imgs/boulder-hover.jpg" alt="">
+      </div>
+    </div>
+    <div data-key="83" class="key rescuebot">
+      <div class="one">
+        <img src="imgs/blades.jpg" alt="">
+      </div>
+      <div class="two">
+        <img src="imgs/blades-hover.jpg" alt="">
+      </div>
+    </div>
+    <div data-key="68" class="key rescuebot">
+      <div class="one">
+        <img src="imgs/optimus-prime.jpg" alt="">
+      </div>
+      <div class="two">
+        <img src="imgs/optimus-prime-hover.jpg" alt="">
+      </div>
+    </div>
+    <div data-key="70" class="key rescuebot">
+      <div class="one">
+        <img src="imgs/bumble-bee.jpg" alt="">
+      </div>
+      <div class="two">
+        <img src="imgs/bumble-bee-hover.jpg" alt="">
+      </div>
+    </div>
+    <div data-key="71" class="key rescuebot">
+      <div class="one">
+        <img src="imgs/chase.jpg" alt="">
+      </div>
+      <div class="two">
+        <img src="imgs/chase-hover.jpg" alt="">
+      </div>
+    </div>
+    <div data-key="72" class="key rescuebot">
+      <div class="one">
+        <img src="imgs/heatwave.jpg" alt="">
+      </div>
+      <div class="two">
+        <img src="imgs/heatwave-hover.jpg" alt="">
+      </div>
+    </div>
+  </div>
+
+  <audio data-key="65" src="sounds/clap.wav"></audio>
+  <audio data-key="83" src="sounds/hihat.wav"></audio>
+  <audio data-key="68" src="sounds/kick.wav"></audio>
+  <audio data-key="70" src="sounds/openhat.wav"></audio>
+  <audio data-key="71" src="sounds/boom.wav"></audio>
+  <audio data-key="72" src="sounds/ride.wav"></audio>
+  <audio data-key="32" src="sounds/thats-so-funny.wav"></audio>
+
+
+  <script>
+   function keyPlaySound (event) {
+     var audio = document.querySelector('audio[data-key="' + event.keyCode + '"]')
+     console.log(audio);
+     // const audio = document.querySelector('audio[data-key="${event.keyCode}"]') //ES6 alternative
+     var key = document.querySelector('.key[data-key="' + event.keyCode + '"]')
+
+     if(!audio)return
+     audio.currentTime = 0 // this starts audio at 0. Allows you to play a letter in quick succession
+     audio.play()
+     key.classList.add('playing')
+
+      const keys = document.querySelectorAll('.key')
+      keys.forEach(function(key){
+        key.addEventListener('transitionend', removeTransition)
+      })
+
+      function removeTransition(e){
+        if(e.propertyName !== 'transform') return
+        this.classList.remove('playing')
+      }
+
+   }
+   function clickPlaySound(event){
+     var audio = document.querySelector('audio');
+     audio.play();
+   }
+   window.addEventListener('keydown', keyPlaySound)
+  //  window.addEventListener('click', clickPlaySound)
+
+  </script>
+
+</body>
+</html>
