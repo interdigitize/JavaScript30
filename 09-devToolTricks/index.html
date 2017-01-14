@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+<body>
+
+  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+    const p = document.querySelector('p');
+
+    function makeGreen() {
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+
+    // Regular
+    console.log('allo');
+
+    // Interpolated
+    console.log('Allo, I am a %s string', '#$@#')
+    console.log(`Allo, I am ${dogs[0].name}`) //ES6
+
+    // Styled
+    console.log('%c I am some great text', 'fong-size:50px; background:red')
+
+    // warning!
+    console.warn('ahhhh')
+
+    // Error :|
+    console.error('ummm, you may want to look at this.')
+
+    // Info
+    console.info('Something good to know.')
+
+    // Testing
+    console.assert(1===2, 'This will only show if it is wrong, so... sorry')
+
+    // clearing
+    console.clear();
+
+    // Viewing DOM Elements
+    console.log(p); // shows the actual element itself
+    console.dir(p); //look at properties and methods on an element
+
+    // Grouping together
+    dogs.forEach(dog => {
+      console.group(`${dog.name}`)
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old`);
+      console.log(`${dog.name} is ${dog.age * 7} dog years old`);
+      console.groupEnd(`${dog.name}`);
+    });
+
+    dogs.forEach(dog => {
+      console.groupCollapsed(`${dog.name}`)
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old`);
+      console.log(`${dog.name} is ${dog.age * 7} dog years old`);
+      console.groupEnd(`${dog.name}`);
+    });
+
+    // counting
+    console.count('Allo')
+    console.count('Allo')
+    console.count('Allo')
+    console.count('world')
+    console.count('Allo')
+    console.count('world')
+    console.count('Allo')
+
+    // timing
+    console.time('fetching data');
+    fetch('https://api.github.com/users/interdigitize')
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('fetching data');
+        console.log(data);
+      });
+
+    //table
+    console.table(dogs);
+
+  </script>
+</body>
+</html>
